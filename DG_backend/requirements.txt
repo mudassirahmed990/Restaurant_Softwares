@@ -4,4 +4,5 @@ motor
 beanie 
 passlib[bcrypt] 
 python-jose 
+pydantic[email]
 pydantic-settings
