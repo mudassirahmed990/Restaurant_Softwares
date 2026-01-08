@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from motor.motor_asyncio import AsyncIOMotorClient
 from beanie import init_beanie
+import os
 
 # Import Models
 from app.models.user import User
@@ -13,9 +14,8 @@ from app.routers import auth, menu, orders
 app = FastAPI(title="Foodies API")
 
 # Database Configuration
-MONGO_URL = "mongodb://localhost:27017"
+MONGO_URL = os.getenv("MONGO_URL")
 DB_NAME = "foodies_db"
-
 
 @app.on_event("startup")
 async def app_init():
