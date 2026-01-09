@@ -1,4 +1,7 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, BeforeValidator
+from typing import Optional, Annotated
+
+PyObjectId = Annotated[str, BeforeValidator(str)]
 
 class UserCreate(BaseModel):
     email: EmailStr
@@ -7,7 +10,7 @@ class UserCreate(BaseModel):
     address: str | None = None
 
 class UserResponse(BaseModel):
-    id: str # Converted from MongoDB _id
+    id: PyObjectId
     email: EmailStr
     full_name: str
     

@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from app.models.user import User
 from app.schemas.auth_schema import UserCreate, UserResponse, Token
-from app.core.security import get_password_hash, verify_password, create_access_token
+from app.core.security import get_password_hash, verify_password, create_access_token, get_current_user
 from typing import Annotated
 
 router = APIRouter()
@@ -58,3 +58,12 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
     access_token = create_access_token(subject=user.id)
     
     return {"access_token": access_token, "token_type": "bearer"}
+
+@router.get("/users/me", response_model=UserResponse)
+async def read_users_me(current_user: User = Depends(get_current_user)):
+    """
+    Get the current authenticated user.
+    The response_model=UserResponse ensures that only id, email, 
+    and full_name are sent back (hiding the password).
+    """
+    return current_user
