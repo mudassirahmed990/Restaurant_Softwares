@@ -2,15 +2,12 @@ from fastapi import FastAPI
 from motor.motor_asyncio import AsyncIOMotorClient
 from beanie import init_beanie
 import os
-from dotenv import load_dotenv
 from app.models.user import User
 from app.models.menu import MenuItem
 from app.models.order import Order
 from app.routers import auth, menu, orders, users
 from app.models.deal import Deal # <--- Import Model
 from app.routers import deals
-
-#load_dotenv("C:\\Users\\PMLS\\Desktop\\DG\\DG_backend\\Restaurant_Softwares\\DG_backend\\app\\.env")
 
 # Database Configuration
 MONGO_URL = os.getenv("MONGO")
