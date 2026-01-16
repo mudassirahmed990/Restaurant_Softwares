@@ -10,7 +10,7 @@ from app.routers import auth, menu, orders, users
 from app.models.deal import Deal # <--- Import Model
 from app.routers import deals
 
-load_dotenv("C:\\Users\\PMLS\\Desktop\\DG\\DG_backend\\Restaurant_Softwares\\DG_backend\\app\\.env")
+#load_dotenv("C:\\Users\\PMLS\\Desktop\\DG\\DG_backend\\Restaurant_Softwares\\DG_backend\\app\\.env")
 
 # Database Configuration
 MONGO_URL = os.getenv("MONGO")
