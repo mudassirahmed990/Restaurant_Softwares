@@ -2,20 +2,21 @@ from fastapi import FastAPI
 from motor.motor_asyncio import AsyncIOMotorClient
 from beanie import init_beanie
 import os
-
-# Import Models
+from dotenv import load_dotenv
 from app.models.user import User
 from app.models.menu import MenuItem
 from app.models.order import Order
-
-# Import Routers
 from app.routers import auth, menu, orders, users
+from app.models.deal import Deal # <--- Import Model
+from app.routers import deals
 
-app = FastAPI(title="Foodies API")
+load_dotenv("C:\\Users\\PMLS\\Desktop\\DG\\DG_backend\\Restaurant_Softwares\\DG_backend\\app\\.env")
 
 # Database Configuration
-MONGO_URL = os.getenv("MONGO_URL")
+MONGO_URL = os.getenv("MONGO")
 DB_NAME = "foodies_db"
+
+app = FastAPI(title="Foodies API")
 
 @app.on_event("startup")
 async def app_init():
@@ -23,14 +24,15 @@ async def app_init():
     client = AsyncIOMotorClient(MONGO_URL)
     await init_beanie(
         database=client[DB_NAME],
-        document_models=[User, MenuItem, Order]
+        document_models=[User, MenuItem, Order, Deal]
     )
 
 # Register Routers
 app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
 app.include_router(menu.router, prefix="/menu", tags=["Menu"])
 app.include_router(orders.router, prefix="/orders", tags=["Orders"])
-app.include_router(users.router, tags=["Users"]) 
+app.include_router(users.router, tags=["Users"])
+app.include_router(deals.router, prefix="/deals", tags=["Deals"])
 
 @app.get("/")
 async def root():

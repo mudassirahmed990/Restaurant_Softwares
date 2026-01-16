@@ -13,6 +13,9 @@ class UserResponse(BaseModel):
     id: PyObjectId
     email: EmailStr
     full_name: str
+    role: str = "customer"
+    address: Optional[str] = None
+    phone: Optional[str] = None
     
     class Config:
         # Allows Pydantic to read data from Beanie/ORM objects

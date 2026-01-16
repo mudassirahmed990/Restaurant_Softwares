@@ -1,14 +1,16 @@
 from beanie import Document, PydanticObjectId
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 from datetime import datetime
 from enum import Enum
 
 class OrderStatus(str, Enum):
     PENDING = "Pending"
+    CONFIRMED = "Confirmed"
     PREPARING = "Preparing"
     OUT_FOR_DELIVERY = "Out for Delivery"
     DELIVERED = "Delivered"
+    CANCELLED = "Cancelled"
 
 # Ensure this inherits BaseModel
 class OrderItem(BaseModel):
@@ -16,6 +18,7 @@ class OrderItem(BaseModel):
     name: str
     quantity: int
     price: float
+    instructions: Optional[str] = None
 
 class Order(Document):
     user_id: PydanticObjectId
