@@ -11,3 +11,5 @@ class OrderItemSchema(BaseModel):
 class OrderCreate(BaseModel):
     items: List[OrderItemSchema]
     total_amount: float
+    delivery_address: str 
+    payment_method: str

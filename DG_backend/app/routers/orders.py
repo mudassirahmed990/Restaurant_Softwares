@@ -36,7 +36,9 @@ async def create_order(order_input: OrderCreate, user: User = Depends(get_curren
     order = Order(
         user_id=user.id,          # Taken from the logged-in user token
         items=model_items,
-        total_amount=order_input.total_amount
+        total_amount=order_input.total_amount,
+        delivery_address=order_input.delivery_address, # Map this
+        payment_method=order_input.payment_method, 
         # status and created_at are auto-filled by the Model defaults
     )
     

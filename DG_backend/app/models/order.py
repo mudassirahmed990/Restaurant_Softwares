@@ -24,8 +24,8 @@ class Order(Document):
     user_id: PydanticObjectId
     items: List[OrderItem]
     total_amount: float
-    delivery_address: str 
-    payment_method: str
+    delivery_address: Optional[str] = "No Address" 
+    payment_method: Optional[str] = "COD"
     status: OrderStatus = OrderStatus.PENDING
     created_at: datetime = datetime.now()
 
