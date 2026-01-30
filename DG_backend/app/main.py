@@ -10,7 +10,7 @@ from app.models.deal import Deal # <--- Import Model
 from app.routers import deals
 
 # Database Configuration
-MONGO_URL = "mongodb+srv://mudayahmedkhan009_db_user:FLo9Ur4Zd1MoKIHz@dg.8s0bwlm.mongodb.net/?appName=DG"#os.getenv("MONGO_URL")
+MONGO_URL = os.getenv("MONGO_URL")
 DB_NAME = "foodies_db"
 
 app = FastAPI(title="Foodies API")
