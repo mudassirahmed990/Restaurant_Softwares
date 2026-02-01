@@ -14,3 +14,14 @@ async def get_deals():
 async def create_deal(deal: Deal):
     await deal.create()
     return deal
+
+@router.delete("/{item_id}")
+async def delete_deals(item_id: str):
+
+    item = await Deal.get(item_id)
+
+    if not item:
+        raise HTTPException(status_code=404, detail="Item not found")
+    
+    await item.delete()
+    return {"message": "Item deleted successfully"}
