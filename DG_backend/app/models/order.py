@@ -17,13 +17,13 @@ class OrderItem(BaseModel):
     menu_item_id: PydanticObjectId
     name: str
     quantity: int
-    price: int
+    price: float
     instructions: Optional[str] = None
 
 class Order(Document):
     user_id: PydanticObjectId
     items: List[OrderItem]
-    total_amount: int
+    total_amount: float
     delivery_address: Optional[str] = "No Address"
     payment_method: Optional[str] = "COD"
     status: OrderStatus = OrderStatus.PENDING

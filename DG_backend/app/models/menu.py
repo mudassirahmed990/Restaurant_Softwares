@@ -5,13 +5,13 @@ from typing import List, Optional
 # 1. Create a Schema for Variations
 class Variation(BaseModel):
     name: str   # e.g., "Single Serving" or "1kg"
-    price: int
+    price: float
 
 # 2. Update the Main Model
 class MenuItem(Document):
     name: str
     description: str
-    price: int       # Base price
+    price: float       # Base price
     image_url: str
     category: str
     is_available: bool = True
