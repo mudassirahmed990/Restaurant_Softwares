@@ -8,4 +8,5 @@ python-jose
 pydantic[email]
 pydantic-settings
 python-multipart
+fastapi-mail
 
