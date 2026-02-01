@@ -1,12 +1,12 @@
-from pydantic import BaseModel, EmailStr, BeforeValidator
+from pydantic import BaseModel, EmailStr, BeforeValidator, Field
 from typing import Optional, Annotated
 
 PyObjectId = Annotated[str, BeforeValidator(str)]
 
 class UserCreate(BaseModel):
     email: EmailStr
-    password: str
-    full_name: str
+    password: str = Field(..., min_length=6)
+    full_name: str = Field(..., min_length=2, max_length=25)
     address: str | None = None
 
 class UserResponse(BaseModel):
